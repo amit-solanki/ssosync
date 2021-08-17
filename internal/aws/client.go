@@ -130,7 +130,7 @@ func (c *client) sendRequestWithBody(method string, url string, body interface{}
 	}
 
 	log.Info("*********** resp.Body **********")
-	log.Info(string(resp.Body))
+	log.Info(string(response))
 
 	// If we get a non-2xx status code, raise that via an error
 	if resp.StatusCode < http.StatusOK || resp.StatusCode > http.StatusNoContent {
