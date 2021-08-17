@@ -1,7 +1,10 @@
 # .github/workflows/release.yaml
 name: release
 
-on: [push]
+on:
+  push:
+    tags:
+      - '*'
 
 permissions:
   contents: write
@@ -26,6 +29,8 @@ jobs:
         with:
           distribution: goreleaser
           version: latest
-          args: release
+          args: build --single-target
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GOOS: linux
+          GOARCH: amd64
