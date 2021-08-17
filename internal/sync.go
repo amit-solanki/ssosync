@@ -124,7 +124,7 @@ func (s *syncGSuite) SyncUsers() error {
 			}
 			continue
 		}
-		ll.Info("creating user ")
+		ll.Info("creating user with new message")
 
 		uu, err := s.aws.CreateUser(aws.NewUser(
 			u.Name.GivenName,
