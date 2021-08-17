@@ -29,8 +29,6 @@ jobs:
         with:
           distribution: goreleaser
           version: latest
-          args: build --single-target
+          args: release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GOOS: linux
-          GOARCH: amd64
