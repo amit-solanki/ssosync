@@ -126,6 +126,10 @@ func (s *syncGSuite) SyncUsers() error {
 		}
 		ll.Info("creating user with new message")
 
+		ll.Info(u.Name.GivenName)
+		ll.Info(u.Name.FamilyName)
+		ll.Info(u.PrimaryEmail)
+
 		uu, err := s.aws.CreateUser(aws.NewUser(
 			u.Name.GivenName,
 			u.Name.FamilyName,

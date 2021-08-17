@@ -90,17 +90,29 @@ func (c *client) sendRequestWithBody(method string, url string, body interface{}
 		return
 	}
 
+	log.Info("************ Request data ****")
+	log.Info(string(d))
+
+	log.Info("*********** url **********")
+	log.Info(url)
+
+
 	// Create a request with our body of JSON
 	r, err := http.NewRequest(method, url, bytes.NewBuffer(d))
 	if err != nil {
 		return
 	}
 
+	log.Info("*********** Step 1 **********")
+
+
 	log.WithFields(log.Fields{"url": url, "method": method})
 
 	// Set the content-type and authorization headers
 	r.Header.Set("Content-Type", "application/scim+json")
 	r.Header.Set("Authorization", fmt.Sprintf("Bearer %s", c.bearerToken))
+
+	log.Info("*********** Step 2 **********")
 
 	// Call the URL
 	resp, err := c.httpClient.Do(r)
@@ -109,11 +121,16 @@ func (c *client) sendRequestWithBody(method string, url string, body interface{}
 	}
 	defer resp.Body.Close()
 
+	log.Info("*********** Step 3 **********")
+
 	// Read the body back from the response
 	response, err = ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return
 	}
+
+	log.Info("*********** resp.Body **********")
+	log.Info(string(resp.Body))
 
 	// If we get a non-2xx status code, raise that via an error
 	if resp.StatusCode < http.StatusOK || resp.StatusCode > http.StatusNoContent {
