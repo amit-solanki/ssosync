@@ -17,6 +17,7 @@
 aws.toml
 credentials.json
 token.json
+dist/
 main
 packaged.yaml
 
