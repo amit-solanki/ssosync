@@ -85,7 +85,7 @@ func (c *client) GetUsers() ([]*admin.User, error) {
 // GetGroups will get the groups from Google's Admin API
 func (c *client) GetGroups() ([]*admin.Group, error) {
 	g := make([]*admin.Group, 0)
-	err := c.service.Groups.List().Customer("my_customer").Pages(context.TODO(), func(groups *admin.Groups) error {
+	err := c.service.Groups.List().Customer("my_customer").Query("name:aws*").Pages(context.TODO(), func(groups *admin.Groups) error {
 		g = append(g, groups.Groups...)
 		return nil
 	})
